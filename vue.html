@@ -10,27 +10,21 @@
     </script>
   </head>
   <body>
-    <h1>Vue practice site - Section 2.3</h1>
+    <h1>Vue practice site - Section 3</h1>
   <div id='app'>
-<p>{{message}}</p>
-
+<button v-on:click="sayhi">Click Me</button>
   </div>
   </body>
 <script type="text/javascript">
-
-
   const vm = new Vue({
     el: '#app',
-    data:{
-      message: 'Message Property',
-    },
+    data:{},
     methods: {
-      //method name colon anonymous function
-      output: function(){
-        alert(this.message)
-      }
+     sayhi:function(){
+       alert('Hello!!!')
+     }
     }
   })
-  //here
+
 </script>
 </html>

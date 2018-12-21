@@ -1,4 +1,22 @@
-# Vue-practice-dec - Section 2.3
-In this Branch I am practicing how to access data with ES6 proxy feature.  The work is seen in vue.html.  Rather than accessing the message in the data object, you can directly access it in the vm object.
+# Vue-practice-dec - Section 3
+In this Branch I am practicing v-on.  Work is seen in vue.html file
 
-Because methods and data object are proxied by the same object, which means methods can directly access data properties using the keyword THIS
+``` html
+<div id='app'>
+<button v-on:click="sayhi">Click Me</button>
+</div>
+```
+
+## And javascript
+
+``` javascript
+const vm = new Vue({
+  el: '#app',
+  data:{},
+  methods: {
+   sayhi:function(){
+     alert('Hello!!!')
+   }
+  }
+})
+```
