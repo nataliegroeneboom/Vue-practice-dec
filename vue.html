@@ -10,32 +10,29 @@
     </script>
   </head>
   <body>
-    <h1>Vue practice site - Section 2</h1>
+    <h1>Vue practice site - Section 2.1</h1>
   <div id='app'>
-<ul>
-  <li v-for = 'element in info_set'>{{element}}</li>
+<ul v-for='element in info_set'>
+  <li>{{element.brand}}</li>
+  <li>{{element.model}}</li>
+  <li>{{element.engine}}</li>
+  <li>{{element.gearbox}}</li>
+
 </ul>
 
   </div>
   </body>
 <script type="text/javascript">
 
-  const model = {
-    name:'<b>OnlyKiosk</b>',
-    url: 'vue_logo.png',
-    title: 'I am the logo of vue'
-  }
 
   const vm = new Vue({
     el: '#app',
     data:{
       info_set: [
-      'first',
-      'second',
-      'third',
-      'fourth',
-      'fifth',
-      'new: sixth'
+    {brand:'Toyota', model:'Land Cruiser', engine:'Petrol', gearbox:'Auto'},
+    {brand:'Nissan', model:'GT-R', engine:'Petrol', gearbox:'Auto'},
+    {brand:'Honda', model:'NSX', engine:'Petrol/Electric', gearbox:'Auto'},
+    {brand:'Great Wall', model:'H5', engine:'Petrol', gearbox:'Auto'},
       ]
     }
   })
