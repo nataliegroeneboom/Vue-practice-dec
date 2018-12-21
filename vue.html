@@ -12,17 +12,17 @@
   <body>
     <h1>Vue practice site - Section 3</h1>
   <div id='app'>
-<button v-on:click="sayhi">Click Me</button>
+    <span>{{message}}</span>
+<button @click="message=!message">Click Me</button>
   </div>
   </body>
 <script type="text/javascript">
   const vm = new Vue({
     el: '#app',
-    data:{},
+    data:{
+      message: true
+    },
     methods: {
-     sayhi:function(){
-       alert('Hello!!!')
-     }
     }
   })
 
