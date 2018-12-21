@@ -1,45 +1,25 @@
-# Vue-practice-dec - Section 3.3: v-model in other tags
+# Vue-practice-dec - Section 3.4: combining v-for, v-bind and v-model
 
-### Example textarea
-
-``` html
-<textarea name="name" rows="5" cols="80" v-model='message'></textarea>
-```
-
-### Example radiotags
+In a select input, you use the v-model to link the data input from the select options, the v-for to loop through the array to display all options stored in the data array and v-bind to bind the value (stored in the data array) to the option tag.
 
 ``` html
-<span>Radio Button</span>
-<span>Apple</span><input type="radio" value='apple' v-model='radioMessage'>
-<span>Peach</span><input type="radio" value='peach' v-model='radioMessage'>
-<span>Orange</span><input type="radio" value='orange' v-model='radioMessage'>
-<p>You have selected <span>{{radioMessage}}</span></p>
-```
-Default set to apple:
-``` javascript
-radioMessage: 'apple'
-```
-### Example checkbox
-``` html
-<span>Apple</span><input type="checkbox" value='apple' v-model='checkbox'>
-<span>Peach</span><input type="checkbox" value='peach' v-model='checkbox'>
-<span>Orange</span><input type="checkbox" value='orange' v-model='checkbox'>
-```
-``` javascript
-data:{
-  message: 'initial value set in DATA',
-  radioMessage: 'apple',
-  checkbox: []
-},
-```
-### Example select
-
-``` html
-<select v-model='option'>
-  <option value='apple'>option 1</option>
-  <option value='pear'>option 2</option>
-  <option value='watermelon'>option 3</option>
+<select v-model='message'>
+  <option v-for='element in list_info' v-bind:value='element.value'>{{element.text}}</option>
 </select>
-<hr/>
-<p>You have selected <span>{{option}}</span> </p>
+```
+``` javascript
+const vm = new Vue({
+  el: '#app',
+  data:{
+    message: 'initial value set in DATA',
+    list_info:[
+      {value:'apple', text:'fruit 1'},
+      {value:'peach', text:'fruit 2'},
+      {value:'orange', text:'fruit 3'},
+      {value:'pear', text:'fruit 4'},
+      {value:'banana', text:'fruit 5'}
+    ]
+  },
+
+})
 ```
