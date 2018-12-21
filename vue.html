@@ -7,6 +7,7 @@
     <style media="screen">
       span{font-size: 23px; color:red}
       p{font-size: 23px}
+      .line{width:400px; border-bottom: 1px solid grey}
     </style>
     <title>Vue Practice Project</title>
     <script type="text/javascript" src="vue.js">
@@ -14,11 +15,20 @@
     </script>
   </head>
   <body>
-    <h1>Vue practice site - Section 4</h1>
+    <h1>Vue practice site - Section 4.1</h1>
   <div id='app'>
+  <h3>Example 1</h3>
     <input v-model='message'>
 <hr />
-<p v-bind:title='title|capitalise'>Processed value: <span>{{message|capitalise}}</span> </p>
+<p >Processed value: <span>{{computed_msg}}</span> </p>
+
+<h3>Example 2</h3>
+<p>First name</p><input v-model='first_name' />
+<p>Last name</p><input v-model='last_name' />
+<div class="line"></div>
+<p>Full name</p><input v-model='full_name' />
+
+
   </div>
   </body>
 <script type="text/javascript">
@@ -26,12 +36,24 @@
     el: '#app',
     data:{
       message: 'initial value set in DATA',
-      title: 'title set in title'
+      first_name: 'Only',
+      last_name: 'Kiosk'
     },
-    filters:{
-      capitalise: function(v){
-        return v.toUpperCase()
+    computed:{
+      computed_msg:function(){
+        return this.message.split('').reverse().join('')
+      },
+      full_name:{
+        get: function(){
+          return this.first_name+ ' '+this.last_name
+        },
+        set: function(v){
+         const array = v.split(' ')
+         this.first_name = array[0]
+         this.last_name = array[array.length-1]
+        }
       }
+
     }
   })
 
