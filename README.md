@@ -32,3 +32,13 @@ data:{
 },
 ```
 ### Example select
+
+``` html
+<select v-model='option'>
+  <option value='apple'>option 1</option>
+  <option value='pear'>option 2</option>
+  <option value='watermelon'>option 3</option>
+</select>
+<hr/>
+<p>You have selected <span>{{option}}</span> </p>
+```
