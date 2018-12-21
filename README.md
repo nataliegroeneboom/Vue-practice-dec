@@ -6,7 +6,8 @@
 <textarea name="name" rows="5" cols="80" v-model='message'></textarea>
 ```
 
-### Example Radio tags
+### Example radiotags
+
 ``` html
 <span>Radio Button</span>
 <span>Apple</span><input type="radio" value='apple' v-model='radioMessage'>
