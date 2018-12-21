@@ -10,9 +10,13 @@
     </script>
   </head>
   <body>
-    <h1>Vue practice site - Section 3</h1>
+    <h1>Vue practice site - Section 3.1</h1>
   <div id='app'>
     <span>{{message}}</span>
+    <p v-show='message'>New P tag</p>
+    <p v-if='message==2'>V-IF: New P tag</p>
+    <p v-else-if='message'>V-ELSE-IF: New P tag</p>
+    <p v-else>V-ELSE: New P tag</p>
 <button @click="message=!message">Click Me</button>
   </div>
   </body>
@@ -20,7 +24,7 @@
   const vm = new Vue({
     el: '#app',
     data:{
-      message: true
+      message: 1
     },
     methods: {
     }

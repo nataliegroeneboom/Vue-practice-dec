@@ -1,64 +1,22 @@
-# Vue-practice-dec - Section 3
-In this Branch I am practicing v-on.  Work is seen in vue.html file
+# Vue-practice-dec - Section 3.1: Conditional Rendering
+
+Buiding on the previous v-on practice I did in the previous section.
+
+##Conditional rendering using v-show
+
+Here whether the p tag will show is determined by the boolean value of the message (either true or false).
 
 ``` html
-<div id='app'>
-<button v-on:click="sayhi">Click Me</button>
-</div>
+<p v-show='message'>New P tag</p>
 ```
 
-``` javascript
-const vm = new Vue({
-  el: '#app',
-  data:{},
-  methods: {
-   sayhi:function(){
-     alert('Hello!!!')
-   }
-  }
-})
-```
+The same can be done with v-if directive. The difference being with v-show the element is loaded but set to display:none if the value is false, but with v-if the element is not loaded at all.
 
-## You can pass arguments
+
+##V-IF and V-else
 ``` html
-<div id='app'>
-<button v-on:click="sayhi('argument value', 'argument value 2')">Click Me</button>
-</div>
-```
-
-``` javascript
-const vm = new Vue({
-  el: '#app',
-  data:{},
-  methods: {
-    sayhi:function(v, v2){
-      alert(v+v2)
-    }
-  }
-})
-```
-
-
-## A shortcut @ sign
-``` html
-<div id='app'>
-<button @click="sayhi('argument value', 'argument value 2')">Click Me</button>
-</div>
-```
-
-## An Inline Method - boolean example
-
-``` html
-<button @click="message=!message">Click Me</button>
-```
-
-``` javascript
-const vm = new Vue({
-  el: '#app',
-  data:{
-    message: true
-  },
-  methods: {
-  }
-})
+<p v-show='message'>New P tag</p>
+<p v-if='message'>V-IF: New P tag</p>
+<p v-else-if='message==2'>V-ELSE-IF: New P tag</p>
+<p v-else>V-ELSE: New P tag</p>
 ```
