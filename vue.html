@@ -10,24 +10,22 @@
     </script>
   </head>
   <body>
-    <h1>Vue practice site - Section 3.1</h1>
+    <h1>Vue practice site - Section 3.2</h1>
   <div id='app'>
-    <span>{{message}}</span>
-    <p v-show='message'>New P tag</p>
-    <p v-if='message==2'>V-IF: New P tag</p>
-    <p v-else-if='message'>V-ELSE-IF: New P tag</p>
-    <p v-else>V-ELSE: New P tag</p>
-<button @click="message=!message">Click Me</button>
+<input v-model.number='message'>
+<p>{{message}}</p>
+<input type="text" v-model.lazy='new_message'>
+<p>{{new_message}}</p>
   </div>
   </body>
 <script type="text/javascript">
   const vm = new Vue({
     el: '#app',
     data:{
-      message: 1
+      message: 'initial value set in DATA',
+      new_message: 'new message property in data'
     },
-    methods: {
-    }
+
   })
 
 </script>

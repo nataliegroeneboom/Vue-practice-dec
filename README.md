@@ -1,22 +1,33 @@
-# Vue-practice-dec - Section 3.1: Conditional Rendering
+# Vue-practice-dec - Section 3.2: v-model
 
-Buiding on the previous v-on practice I did in the previous section.
-
-## Conditional rendering using v-show
-
-Here whether the p tag will show is determined by the boolean value of the message (either true or false).
-
+## A simple example
 ``` html
-<p v-show='message'>New P tag</p>
+<div id='app'>
+<input type="text" v-model='message'>
+<p>{{message}}</p>
+<input type="text" v-model='new_message'>
+<p>{{new_message}}</p>
+</div>
 ```
 
-The same can be done with v-if directive. The difference being with v-show the element is loaded but set to display:none if the value is false, but with v-if the element is not loaded at all.
+``` javascript
+const vm = new Vue({
+  el: '#app',
+  data:{
+    message: 'initial value set in DATA',
+    new_message: 'new message property in data'
+  },
+})
+```
 
+## Modifiers: lazy, number
+Without the lazy modifier the message content is in real time sync with the data being inputted into the input field.  However after you type the lazy modifier, the data will only be updated when the input tag is out of focus.  
 
-## V-IF and V-else
 ``` html
-<p v-show='message'>New P tag</p>
-<p v-if='message'>V-IF: New P tag</p>
-<p v-else-if='message==2'>V-ELSE-IF: New P tag</p>
-<p v-else>V-ELSE: New P tag</p>
+<input type="text" v-model.lazy='new_message'>
+```
+When you enter a number into an input field the data stored is of type string, with the number modifier the type stored is number.
+
+``` html
+<input type="text" v-model.number='new_message'>
 ```
