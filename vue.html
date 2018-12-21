@@ -10,15 +10,9 @@
     </script>
   </head>
   <body>
-    <h1>Vue practice site - Section 2.1</h1>
+    <h1>Vue practice site - Section 2.3</h1>
   <div id='app'>
-<ul v-for='element in info_set'>
-  <li>{{element.brand}}</li>
-  <li>{{element.model}}</li>
-  <li>{{element.engine}}</li>
-  <li>{{element.gearbox}}</li>
-
-</ul>
+<p>{{message}}</p>
 
   </div>
   </body>
@@ -28,12 +22,13 @@
   const vm = new Vue({
     el: '#app',
     data:{
-      info_set: [
-    {brand:'Toyota', model:'Land Cruiser', engine:'Petrol', gearbox:'Auto'},
-    {brand:'Nissan', model:'GT-R', engine:'Petrol', gearbox:'Auto'},
-    {brand:'Honda', model:'NSX', engine:'Petrol/Electric', gearbox:'Auto'},
-    {brand:'Great Wall', model:'H5', engine:'Petrol', gearbox:'Auto'},
-      ]
+      message: 'Message Property',
+    },
+    methods: {
+      //method name colon anonymous function
+      output: function(){
+        alert(this.message)
+      }
     }
   })
   //here
