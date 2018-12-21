@@ -10,11 +10,11 @@
     </script>
   </head>
   <body>
-    <h1>Welcome to another Vue practice site</h1>
+    <h1>Vue practice site - Section 2</h1>
   <div id='app'>
-    <p>My name is <span v-html='name'></span></p>
-    <br />
-    <img v-bind:src='url' v-bind:title='title'/>
+<ul>
+  <li v-for = 'element in info_set'>{{element}}</li>
+</ul>
 
   </div>
   </body>
@@ -28,7 +28,16 @@
 
   const vm = new Vue({
     el: '#app',
-    data:model
+    data:{
+      info_set: [
+      'first',
+      'second',
+      'third',
+      'fourth',
+      'fifth',
+      'new: sixth'
+      ]
+    }
   })
   //here
 </script>
