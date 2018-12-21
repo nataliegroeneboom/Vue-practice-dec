@@ -19,23 +19,21 @@
   <body>
     <h1>Vue practice site - Section 4.2</h1>
   <div id='app'>
-<p v-bind:class='class_object'>I am a p tag</p>
+<p v-bind:style='style_object'>I am a p tag</p>
   </div>
   </body>
 <script type="text/javascript">
   const vm = new Vue({
     el: '#app',
     data:{
-      switch_one: true,
-      switch_two: false
+      style_object: {
+      color: 'red',
+      background: 'blue'  
+      }
+
     },
     computed:{
-      class_object: function(){
-            return{
-              red_font:this.switch_one,
-              blue_background:this.switch_two
-            }
-         }
+
     },
     methods: {}
   })
