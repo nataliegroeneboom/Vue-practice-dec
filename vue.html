@@ -4,18 +4,41 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style media="screen">
+      span{font-size: 23px; color:red}
+      p{font-size: 23px}
+    </style>
     <title>Vue Practice Project</title>
     <script type="text/javascript" src="vue.js">
 
     </script>
   </head>
   <body>
-    <h1>Vue practice site - Section 3.2</h1>
+    <h1>Vue practice site - Section 3.3</h1>
   <div id='app'>
-<input v-model.number='message'>
+<textarea name="name" rows="5" cols="80" v-model='message'></textarea>
 <p>{{message}}</p>
-<input type="text" v-model.lazy='new_message'>
-<p>{{new_message}}</p>
+<hr>
+<h3>Radio Button</h3>
+<span>Apple</span><input type="radio" value='apple' v-model='radioMessage'>
+<span>Peach</span><input type="radio" value='peach' v-model='radioMessage'>
+<span>Orange</span><input type="radio" value='orange' v-model='radioMessage'>
+<p>You have selected <span>{{radioMessage}}</span></p>
+
+<h3>Checkbox</h3>
+<span>Apple</span><input type="checkbox" value='apple' v-model='checkbox'>
+<span>Peach</span><input type="checkbox" value='peach' v-model='checkbox'>
+<span>Orange</span><input type="checkbox" value='orange' v-model='checkbox'>
+<p>You have selected <span>{{checkbox}}</span></p>
+
+<h3>Checkbox</h3>
+<select v-model='option'>
+  <option value='apple'>option 1</option>
+  <option value='pear'>option 2</option>
+  <option value='watermelon'>option 3</option>
+</select>
+<hr/>
+<p>You have selected <span>{{option}}</span> </p>
   </div>
   </body>
 <script type="text/javascript">
@@ -23,7 +46,10 @@
     el: '#app',
     data:{
       message: 'initial value set in DATA',
-      new_message: 'new message property in data'
+      radioMessage: 'apple',
+      checkbox: [],
+      option: ''
+
     },
 
   })

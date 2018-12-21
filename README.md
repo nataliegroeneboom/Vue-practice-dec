@@ -1,33 +1,34 @@
-# Vue-practice-dec - Section 3.2: v-model
+# Vue-practice-dec - Section 3.3: v-model in other tags
 
-## A simple example
+### Example textarea
+
 ``` html
-<div id='app'>
-<input type="text" v-model='message'>
-<p>{{message}}</p>
-<input type="text" v-model='new_message'>
-<p>{{new_message}}</p>
-</div>
+<textarea name="name" rows="5" cols="80" v-model='message'></textarea>
 ```
 
+### Example Radio tags
+``` html
+<span>Radio Button</span>
+<span>Apple</span><input type="radio" value='apple' v-model='radioMessage'>
+<span>Peach</span><input type="radio" value='peach' v-model='radioMessage'>
+<span>Orange</span><input type="radio" value='orange' v-model='radioMessage'>
+<p>You have selected <span>{{radioMessage}}</span></p>
+```
+Default set to apple:
 ``` javascript
-const vm = new Vue({
-  el: '#app',
-  data:{
-    message: 'initial value set in DATA',
-    new_message: 'new message property in data'
-  },
-})
+radioMessage: 'apple'
 ```
-
-## Modifiers: lazy, number
-Without the lazy modifier the message content is in real time sync with the data being inputted into the input field.  However after you type the lazy modifier, the data will only be updated when the input tag is out of focus.  
-
+### Example checkbox
 ``` html
-<input type="text" v-model.lazy='new_message'>
+<span>Apple</span><input type="checkbox" value='apple' v-model='checkbox'>
+<span>Peach</span><input type="checkbox" value='peach' v-model='checkbox'>
+<span>Orange</span><input type="checkbox" value='orange' v-model='checkbox'>
 ```
-When you enter a number into an input field the data stored is of type string, with the number modifier the type stored is number.
-
-``` html
-<input type="text" v-model.number='new_message'>
+``` javascript
+data:{
+  message: 'initial value set in DATA',
+  radioMessage: 'apple',
+  checkbox: []
+},
 ```
+### Example select
