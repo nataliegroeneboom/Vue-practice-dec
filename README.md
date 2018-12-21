@@ -8,9 +8,7 @@ Rather than referencing the classname, you can style the element directly with v
 
 ``` javascript
 data:{
-  style_object: {
       color_choice: 'red',
-  }
 },
 ```
 
