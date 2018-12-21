@@ -10,6 +10,9 @@
       .red_font{color: red}
       .blue_background{background: blue}
       .heavy_font{font-weight: bold}
+      .warning{
+        border: red solid 2px;
+      }
     </style>
     <title>Vue Practice Project</title>
     <script type="text/javascript" src="vue.js">
@@ -17,25 +20,34 @@
     </script>
   </head>
   <body>
-    <h1>Vue practice site - Section 4.2</h1>
+    <h1>Vue practice site - Section 5</h1>
   <div id='app'>
-<p v-bind:style='style_object'>I am a p tag</p>
+<textarea v-bind:class='{warning: !remain}' v-model='message' v-on:input='check'></textarea>
+<p>{{remain}}/{{limit}}</p>
+
+
   </div>
   </body>
 <script type="text/javascript">
   const vm = new Vue({
     el: '#app',
     data:{
-      style_object: {
-      color: 'red',
-      background: 'blue'  
+      message: 'user-submitted data stored here',
+      limit:50
+    },
+    computed:{
+      remain: function(){
+        return this.limit - this.message.length
       }
 
     },
-    computed:{
-
-    },
-    methods: {}
+    methods: {
+      check: function(){
+        if(this.remain<0){
+          this.message = this.message.substr(0,this.limit)
+        }
+      }
+    }
   })
 
 </script>
