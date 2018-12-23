@@ -1,34 +1,50 @@
-# Vue-practice-dec - Section 5: small example
+# Vue-practice-dec - Section 6: Components
 
-I created a basic input field where you can input up to 50 characters.  
-
+Component registration starts with creating a template, you need a route div containing the component content.
 
 ``` html
-<textarea v-bind:class='{warning: !remain}' v-model='message' v-on:input='check'></textarea>
-<p>{{remain}}/{{limit}}</p>
+<template>
+  <div></div>
+</template>
 ```
-
-Here limit is a fixed number, remain is a calculated number based on the number of characters of the input message length.   The check function uses v-on:input as a listener returning the message no greater than the number of characters.  And finally bound styling so when the remain is at 0 thus limit has been reached, 0 is false and so the warning class is applied.  
+Then we need to register the component, the component methods takes two arguments, component name and a json object - where the component registration information is stored.  Inside the json object four properties are set.  Template, data, props and methods with template being the one which is compulsory.  Data in a component must use an anonymous function. Props value is an array.
 
 ``` javascript
-const vm = new Vue({
-  el: '#app',
-  data:{
-    message: 'user-submitted data stored here',
-    limit:50
+Vue.component('simple_comp', {
+  template: '#temp',
+  data: function(){
+    return {}
   },
-  computed:{
-    remain: function(){
-      return this.limit - this.message.length
-    }
-
-  },
-  methods: {
-    check: function(){
-      if(this.remain<0){
-        this.message = this.message.substr(0,this.limit)
-      }
-    }
-  }
+  props: [],
+  methods: {}
 })
+```
+Then we inject the component into html with the component name
+``` html
+<simple_comp></simple_comp>
+```
+Injecting data from Component
+
+``` javascript
+Vue.component('simple_comp', {
+  template: '#temp',
+  data: function(){
+    return {
+      message: 'Components own data',
+      message_1: 'Another of Components own data',
+    }
+  },
+  props: [],
+  methods: {}
+})
+```
+And the html
+``` html
+<template id='temp'>
+  <div class='comp_root'>
+    <p>this is a component</p>
+    <p>{{message}}</p>
+    <p>{{message_1}}</p>
+  </div>
+</template>
 ```

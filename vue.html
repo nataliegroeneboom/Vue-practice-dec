@@ -7,12 +7,7 @@
     <style media="screen">
       span{font-size: 40px;}
       p{font-size: 40px}
-      .red_font{color: red}
-      .blue_background{background: blue}
-      .heavy_font{font-weight: bold}
-      .warning{
-        border: red solid 2px;
-      }
+      .comp_root{background:red; color: white}
     </style>
     <title>Vue Practice Project</title>
     <script type="text/javascript" src="vue.js">
@@ -20,34 +15,38 @@
     </script>
   </head>
   <body>
-    <h1>Vue practice site - Section 5</h1>
+    <h1>Vue practice site - Section 6</h1>
   <div id='app'>
-<textarea v-bind:class='{warning: !remain}' v-model='message' v-on:input='check'></textarea>
-<p>{{remain}}/{{limit}}</p>
-
-
+    <simple_comp></simple_comp>
   </div>
+  <template id='temp'>
+    <div class='comp_root'>
+      <p>this is a component</p>
+      <p>{{message}}</p>
+      <p>{{message_1}}</p>
+    </div>
+  </template>
   </body>
 <script type="text/javascript">
+//register the component
+Vue.component('simple_comp', {
+  template: '#temp',
+  data: function(){
+    return {
+      message: 'Components own data',
+      message_1: 'Another of Components own data',
+    }
+  },
+  props: [],
+  methods: {}
+})
+
+
   const vm = new Vue({
     el: '#app',
-    data:{
-      message: 'user-submitted data stored here',
-      limit:50
-    },
-    computed:{
-      remain: function(){
-        return this.limit - this.message.length
-      }
-
-    },
-    methods: {
-      check: function(){
-        if(this.remain<0){
-          this.message = this.message.substr(0,this.limit)
-        }
-      }
-    }
+    data:{},
+    computed:{},
+    methods: {}
   })
 
 </script>
