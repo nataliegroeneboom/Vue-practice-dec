@@ -1,50 +1,67 @@
-# Vue-practice-dec - Section 6: Components
+# Vue-practice-dec - Section 6.1: Sending out data from a component
 
-Component registration starts with creating a template, you need a route div containing the component content.
+The template contains an input message and button
 
-``` html
-<template>
-  <div></div>
-</template>
-```
-Then we need to register the component, the component methods takes two arguments, component name and a json object - where the component registration information is stored.  Inside the json object four properties are set.  Template, data, props and methods with template being the one which is compulsory.  Data in a component must use an anonymous function. Props value is an array.
-
-``` javascript
-Vue.component('simple_comp', {
-  template: '#temp',
-  data: function(){
-    return {}
-  },
-  props: [],
-  methods: {}
-})
-```
-Then we inject the component into html with the component name
-``` html
-<simple_comp></simple_comp>
-```
-Injecting data from Component
-
-``` javascript
-Vue.component('simple_comp', {
-  template: '#temp',
-  data: function(){
-    return {
-      message: 'Components own data',
-      message_1: 'Another of Components own data',
-    }
-  },
-  props: [],
-  methods: {}
-})
-```
-And the html
 ``` html
 <template id='temp'>
   <div class='comp_root'>
-    <p>this is a component</p>
-    <p>{{message}}</p>
-    <p>{{message_1}}</p>
+<h2>Component</h2>
+<input v-model='message'/>
+<button>Send Data</button>
   </div>
 </template>
+```
+Input data sends data to message in component Data
+
+``` javascript
+var vm = Vue.component('comp', {
+  template:'#temp',
+  data: function(){
+    return {
+      message: 'I want to go to Vue P tag'
+    }
+  },
+  props:[],
+  methods:{}
+  },
+})
+```
+Say we want to inject the message into content
+
+``` html
+<div id='app'>
+  <h1>Parent DIV</h1>
+  <comp v-on:relay='content=arguments[0]'></comp>
+</p>{{content}}</p>
+</div>
+<hr/>
+```
+Global Component
+``` javascript
+var vm = new Vue({
+  el:'#app',
+  data: {
+    content: "Waiting for data from Component"
+  }
+})
+```
+First bind the click event to a method called 'send'
+
+``` html
+<button v-on:click='send'>Send Data</button>
+```
+
+Add the create method and within the function add the emit method taking two arguments.  The first argument is the name of the self defined event, we will call it 'relay', the second argument is the data we want to emit.  The data we want to send is stored in the message property.
+
+``` javascript
+methods:{
+  send:function(){
+    this.$emit('relay', this.message)
+  }
+},
+```   
+Next we bind the relay event to the component and assign it to the content property.  The value set by the emit method is stored in an array, thus arguments[0].
+
+``` html
+<comp v-on:relay='content=arguments[0]'></comp>
 ```
