@@ -1,67 +1,23 @@
-# Vue-practice-dec - Section 6.1: Sending out data from a component
+# Vue-practice-dec - Section 6.2: Sending out multiple values simultaneously
 
-The template contains an input message and button
-
+First we have to create a method to help us allocate the two values.
 ``` html
-<template id='temp'>
-  <div class='comp_root'>
-<h2>Component</h2>
-<input v-model='message'/>
-<button>Send Data</button>
-  </div>
-</template>
+<comp v-on:relay='allocate'></comp>
 ```
-Input data sends data to message in component Data
+Define the method in the vue instance, taking two arguments v1 and v2 and assign content1 and content2 to the arguments
 
-``` javascript
-var vm = Vue.component('comp', {
-  template:'#temp',
-  data: function(){
-    return {
-      message: 'I want to go to Vue P tag'
-    }
-  },
-  props:[],
-  methods:{}
-  },
-})
-```
-Say we want to inject the message into content
-
-``` html
-<div id='app'>
-  <h1>Parent DIV</h1>
-  <comp v-on:relay='content=arguments[0]'></comp>
-</p>{{content}}</p>
-</div>
-<hr/>
-```
-Global Component
 ``` javascript
 var vm = new Vue({
   el:'#app',
   data: {
-    content: "Waiting for data from Component"
-  }
+    content1: "Controlled by content1",
+    content2: "Controlled by content2",
+  },
+  methods:{
+    allocate: function(v1, v2){
+      this.content1 = v1
+      this.content2 = v2
+    }
+  },
 })
-```
-First bind the click event to a method called 'send'
-
-``` html
-<button v-on:click='send'>Send Data</button>
-```
-
-Add the create method and within the function add the emit method taking two arguments.  The first argument is the name of the self defined event, we will call it 'relay', the second argument is the data we want to emit.  The data we want to send is stored in the message property.
-
-``` javascript
-methods:{
-  send:function(){
-    this.$emit('relay', this.message)
-  }
-},
-```   
-Next we bind the relay event to the component and assign it to the content property.  The value set by the emit method is stored in an array, thus arguments[0].
-
-``` html
-<comp v-on:relay='content=arguments[0]'></comp>
 ```

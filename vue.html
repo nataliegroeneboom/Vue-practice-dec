@@ -14,14 +14,17 @@
 	<body>
 		<div id='app'>
       <h1>Parent DIV</h1>
-			<comp v-on:relay='content=arguments[0]'></comp>
-    </p>{{content}}</p>
+			<comp v-on:relay='allocate'></comp>
+    <p> {{content1}} </p>
+   <p> {{content2}} </p>
 		</div>
 		<hr/>
 		<template id='temp'>
 			<div class='comp_root'>
 <h2>Component</h2>
-<input v-model='message'/>
+<input v-model='message1'/>
+<hr>
+<input v-model='message2'/>
 <button v-on:click='send'>Send Data</button>
 			</div>
 		</template>
@@ -31,21 +34,29 @@
     template:'#temp',
     data: function(){
       return {
-        message: 'I want to go to Vue P tag'
+        message1: 'Stored in message1',
+        message2: 'Stored in message2'
       }
     },
     props:[],
     methods:{
       send:function(){
-        this.$emit('relay', this.message)
+        this.$emit('relay', this.message1, this.message2)
       }
     },
   })
 		var vm = new Vue({
 			el:'#app',
       data: {
-        content: "Waiting for data from Component"
-      }
+        content1: "Controlled by content1",
+        content2: "Controlled by content2",
+      },
+      methods:{
+        allocate: function(v1, v2){
+          this.content1 = v1
+          this.content2 = v2
+        }
+      },
 		})
 
     </script>
