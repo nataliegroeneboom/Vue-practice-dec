@@ -1,23 +1,23 @@
-# Vue-practice-dec - Section 6.2: Sending out multiple values simultaneously
+# Vue-practice-dec - Section 6.3: using an original event on component tags
 
-First we have to create a method to help us allocate the two values.
+All events installed on the component tag are regarded as a self defined event.  For example this would not work:
+
 ``` html
-<comp v-on:relay='allocate'></comp>
+<comp v-on:click='alert'></comp>
 ```
-Define the method in the vue instance, taking two arguments v1 and v2 and assign content1 and content2 to the arguments
-
 ``` javascript
 var vm = new Vue({
   el:'#app',
-  data: {
-    content1: "Controlled by content1",
-    content2: "Controlled by content2",
-  },
+  data: {  },
   methods:{
-    allocate: function(v1, v2){
-      this.content1 = v1
-      this.content2 = v2
+    alert: function(){
+      alert('hello')
     }
   },
 })
+```
+
+The solution is to add a native modifier, now the click event is regarded as an original event.
+``` html
+<comp v-on:click.native='alert'></comp>
 ```
