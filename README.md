@@ -51,7 +51,7 @@ So with the above example you could run in console to get the instance object an
 vm.$data
 comp.$data
 ```
-# $props
+### $props
 add props to the registered component
 
 ``` javascript
@@ -62,3 +62,27 @@ add the props the the component tag
 ``` html
 <comp ref='comp' prop1='first' prop2='second' prop3='third'></comp>
 ```
+In the console run the below to output all props contained in an object
+``` console
+comp.$props
+comp.$props.prop1
+```
+
+### $el
+This will return the DOM object of the div that is controlled by the vue instance
+The two will yeild the same result
+
+``` console
+vm.$el
+document.getElementById('app')
+```
+### $options
+Vue allows us to define our own options.  Define the below in the vue instance:
+``` javascript
+my_option: 'my own option'
+```
+and in the console run, and it will return the value 'my own option'
+``` console
+vm.$options.my_option
+```
+This also can work in self defined components
