@@ -11,23 +11,21 @@
 	<body>
 
 		<div id="app">
-<input v-model='msg'>
+<p>I am a P tag defined in #app DIV</p>
+<p>I am a P tag defined in #app DIV</p>
+<p>I am a P tag defined in #app DIV</p>
+<p>I am a P tag defined in #app DIV</p>
 	   </div>
-
+<template id='template'>
+	<i>I am a template</i>
+</template>
 
 	<script type='text/javascript'>
 
 
 	var vm = new Vue({
 	  el: "#app",
-		data: {
-			msg: 'apple'
-		},
-		watch: {
-			msg: function(newValue, oldValue){
-				console.log(newValue, oldValue)
-			}
-		}
+	 template: '#template'
 	})
 	</script>
 	</body>
