@@ -11,21 +11,31 @@
 	<body>
 
 		<div id="app">
-<p>I am a P tag defined in #app DIV</p>
-<p>I am a P tag defined in #app DIV</p>
-<p>I am a P tag defined in #app DIV</p>
-<p>I am a P tag defined in #app DIV</p>
+<comp></comp>
 	   </div>
-<template id='template'>
-	<i>I am a template</i>
+<template id='temp'>
+<div id="temp_root">
+<p>{{msg}}</p>
+</div>
 </template>
 
 	<script type='text/javascript'>
 
+Vue.component('comp', {
+	template:'#temp',
+	inject:['msg'],
+	data: function(){
+		return{
+			msg: this.msg
+		}
+	},
+})
 
 	var vm = new Vue({
 	  el: "#app",
-	 template: '#template'
+	 	provide: {
+		 msg: 'message from Vue.data'
+	 }
 	})
 	</script>
 	</body>
