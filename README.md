@@ -1,4 +1,4 @@
-# Vue-practice-dec - Section 8.3: Instance Object
+# Vue-practice-dec - Section 8.3: Instance Properties
 
 
 All instance property and method names are prefix with a $.
