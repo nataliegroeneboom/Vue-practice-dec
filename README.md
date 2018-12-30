@@ -1,4 +1,4 @@
-# Vue-practice-dec - Section 8.6: Instance Methods - $on and $once
+# Vue-practice-dec - Section 8.6: Event Methods - $on and $once
 
 Both $on and $once are used to monitor events. $on will keep monitoring the named event, while $once will only monitor it once.
 
