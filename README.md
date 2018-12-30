@@ -1,4 +1,4 @@
-# Vue-practice-dec - Section 8.4: Instance Methods - $set and $delete
+# Vue-practice-dec - Section 8.5: Instance Methods - $set and $delete
 
 ### $set
 
