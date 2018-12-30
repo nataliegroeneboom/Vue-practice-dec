@@ -6,15 +6,20 @@
 		<meta name='viewport' content='width=device-width,initial-scale=1.0'>
 		<style>
 		body{font-size: 33px; color: black}
+		.fade-enter{opacity:0;font-size: 0px}
+		.fade-enter-active{transition:opacity 3s, font-size 3s}
+		.fade-leave-active{transition:opacity 3s, font-size 3s}
+		.fade-leave-to{opacity:0; font-size: 0px; font-size: 0px}
 		</style>
 		<script type='text/javascript' src='vue.js'></script>
 	<body>
 
 <div id="app">
+	<transition name='fade'>
+<p v-if='show'>I am the p tag</p>
+	</transition>
+	<button @click='show=!show'>Show/Hide</button>
 <!-- <comp ></comp> -->
-		<p>the value of the msg2 is <b style='color:red'>{{msg2}}</b></p>
-		<hr/>
-		<button v-on:click='update'>Update msg2</button>
 </div>
 
 <!-- <template id='temp'>
@@ -28,38 +33,15 @@
 // 	template:'#temp',
 // 	props: ['prop1', 'prop2', 'prop3'],
 // 	data: function(){
-// 		return{
-// 			msg1: 'Comp msg1',
-// 			msg2: 'Comp msg2',
-// 			msg3: 'Comp msg3',
-// 		}
+// 		return{	}
 // 	},
 // })
 
 var vm = new Vue({
   el: "#app",
   data: {
-		// msg:'msg defined in vue data',
-					msg2:0},
-	methods: {
-		update: function(){
-			this.msg2++
-			this.$nextTick(function(){
-				console.log(this.$el.innerText)
-			})
-			//console.log(this.$el.innerText);  //asyc method DOM not updated
-		}
+		show: true
 	},
-	// beforeCreate: function(){console.log('Hook:beforeCreate');},
-	// created: function(){console.log('Hook:created');},
-	// beforeMount: function(){console.log('Hook:beforeMount');},
-	// mounted: function(){console.log('Hook:mounted');},
-	// beforeUpdate: function(){console.log('Hook:beforeUpdate');},
-	// updated: function(){console.log('Hook:updated');},
-	// beforeDestroy: function(){console.log('Hook:beforeDestroy');},
-	// destroyed: function(){console.log('Hook:destroyed');},
-
-
 })
 
 	</script>
