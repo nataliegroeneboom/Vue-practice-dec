@@ -5,22 +5,42 @@
 		<meta http-equiv='content-type' content='text/html;charset=utf-8'>
 		<meta name='viewport' content='width=device-width,initial-scale=1.0'>
 		<style>
-
+		body{font-size: 33px; color: white}
+		#mount1{background: crimson;padding: 5px; margin: 5px}
+		#mount2{background: teal;padding: 5px; margin: 5px}
+		#mount3{background: violet;padding: 5px; margin: 5px}
 		</style>
 		<script type='text/javascript' src='vue.js'></script>
 	<body>
 
-		<div id="app">
+
+
+		<!-- <div id="app"> -->
 <!-- <comp ></comp> -->
-	<button v-on:click='trigger_a'>Trigger Event A</button>
-	<button v-on:click='trigger_b'>Trigger Event B</button>
-	   </div>
+<!-- <p>{{msg}}</p> </div> -->
+
 <!-- <template id='temp'>
 <div id="temp_root">
 </div>
 </template> -->
 
+<div id='mount1'><p>Mount Point 1</p></div>
+<div id='mount2'><p>Mount Point 2</p></div>
+<div id='mount3'><p>Mount Point 3</p></div>
+
+
+
 	<script type='text/javascript'>
+
+	const extend = Vue.extend({
+		template:"<div style='color:red'><p>{{msg}}</p></div>",
+		data: function(){
+			return {
+				msg: 'message from subclass'
+			}
+		}
+	})
+	 new extend().$mount('#mount3')
 
 // Vue.component('comp', {
 // 	template:'#temp',
@@ -34,28 +54,12 @@
 // 	},
 // })
 
-var vm = new Vue({
-  el: "#app",
-  data: {},
- methods: {
-   trigger_a: function(){
-     this.$emit('event_a')
-   },
-   trigger_b:function(){
-     this.$emit('event_b')
-   },
-   sayhi:function(){console.log('Hi!');},
-	  saybuy:function(){console.log('Buy!');},
- }
-})
-	vm.$on('event_a',vm.sayhi)
-	vm.$on('event_a',vm.saybuy)
-
-	vm.$on('event_b',vm.sayhi)
-	vm.$on('event_b',vm.saybuy)
-
-vm.$off('event_b', vm.saybuy)
-//	vm.$off() // will unbind everything
+// var vm = new Vue({
+// //  el: "#app",
+//   data: { msg:'msg defined in vue data'},
+//
+// })
+// vm.$mount('#app')
 
 	</script>
 	</body>

@@ -1,81 +1,34 @@
-# Vue-practice-dec - Section 8.6: Event Methods - $on and $once
+# Vue-practice-dec - Section 8.7: Lifecycle Methods: $mount, methods of global vue object: extend
 
-Both $on and $once are used to monitor events. $on will keep monitoring the named event, while $once will only monitor it once.
+### $mount
 
-v-on takes two arguments, the event name and a callback function.  The callback argument will automatically be set the the value of the emit method.
-
-### Example: $on, $once
-an example of $on, the 'event' is listened to every time and the value of the message is logged to the console.  
-
-``` html
-<div id="app">
-<p>the value of the MSG: {{msg}}</p>
-<hr>
-<button v-on:click='trigger'>TRIGGER</button>
-</div>
-
-<script type='text/javascript'>
-
-var vm = new Vue({
-  el: "#app",
-  data: {
-    msg: 1,
- },
- methods: {
-   trigger: function(){
-     this.msg++
-     this.$emit(
-       'event',
-       this.msg
-     )
-   }
- }
-})
-vm.$on(
-  'event',
-  function(arg){
-    console.log(arg);
-  }
-)
+If you remove the 'el' property from the Vue instance, your program will stop working.  This can be resolved by using $mount.
+the $mount method argument is the id of parent div.
+``` javascript
+vm.$mount('#app')
 ```
-if vm.$on is replaced with vm.$once, we will only see the console log of the first 'event'.  
+### Methods of the global vue object: extend Method
+The extend method can create a subclass of the base vue constructor.  Its argument value should be an object containing component options.  This subclass created needs to be instantiated first.
 
-### $off
-this method removes listeners.
-
-### Example
+In the below example I have three divs serving as mounting points.  
 ``` html
-<div id="app">
-<button v-on:click='trigger_a'>Trigger Event A</button>
-<button v-on:click='trigger_b'>Trigger Event B</button>
- </div>
- ```
- if no arguments are called then all listeners are unbound.
- ``` javascript
- var vm = new Vue({
-   el: "#app",
-   data: {},
-  methods: {
-    trigger_a: function(){
-      this.$emit('event_a')
-    },
-    trigger_b:function(){
-      this.$emit('event_b')
-    },
-    sayhi:function(){console.log('Hi!');},
- 	  saybuy:function(){console.log('Buy!');},
+<div id='mount1'><p>Mount Point 1</p></div>
+<div id='mount2'><p>Mount Point 2</p></div>
+<div id='mount3'><p>Mount Point 3</p></div>
+```
+
+We call the extend method to create a subclass.
+``` javascript
+const extend = Vue.extend({
+  template:"<div style='color:red'><p>{{msg}}</p></div>",
+  data: function(){
+    return {
+      msg: 'message from subclass'
+    }
   }
- })
- 	vm.$on('event_a',vm.sayhi)
- 	vm.$on('event_a',vm.saybuy)
-
- 	vm.$on('event_b',vm.sayhi)
- 	vm.$on('event_b',vm.saybuy)
-
- vm.$off('event_b', vm.saybuy)
- 	vm.$off() // will unbind everything
-  ```
-  If you want to unbind event_b and the callback saybuy:
-  ``` javascript
-  vm.$off('event_b', vm.saybuy)
-  ```
+})
+```
+Then we instantiate the subclass, connecting the $mount method
+``` javascript
+	 new extend().$mount('#mount3')
+```   
