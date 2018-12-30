@@ -1,34 +1,31 @@
-# Vue-practice-dec - Section 8.7: Lifecycle Methods: $mount, methods of global vue object: extend
+# Vue-practice-dec - Section 8.8: Lifecycle hooks and nextTick
 
-### $mount
+Lifecycle hooks can be sub divided into four categories.  Create, mount, update and destroy. Each lifecycle hook is connected to an anonymous function.
 
-If you remove the 'el' property from the Vue instance, your program will stop working.  This can be resolved by using $mount.
-the $mount method argument is the id of parent div.
-``` javascript
-vm.$mount('#app')
-```
-### Methods of the global vue object: extend Method
-The extend method can create a subclass of the base vue constructor.  Its argument value should be an object containing component options.  This subclass created needs to be instantiated first.
+### nextTick method
+The example below shows a simple update method, the console log result lags a previous value.  
 
-In the below example I have three divs serving as mounting points.  
 ``` html
-<div id='mount1'><p>Mount Point 1</p></div>
-<div id='mount2'><p>Mount Point 2</p></div>
-<div id='mount3'><p>Mount Point 3</p></div>
-```
-
-We call the extend method to create a subclass.
+<p>the value of the msg2 is <b style='color:red'>{{msg2}}</b></p>
+<hr/>
+<button v-on:click='update'>Update msg2</button>
+```   
 ``` javascript
-const extend = Vue.extend({
-  template:"<div style='color:red'><p>{{msg}}</p></div>",
-  data: function(){
-    return {
-      msg: 'message from subclass'
-    }
-  }
+var vm = new Vue({
+  el: "#app",
+  data: {
+					msg2:0},
+	methods: {
+		update: function(){
+			this.msg2++
+			console.log(this.$el.innerText);  //asyc method DOM not updated
+		}
+	},
+  ```
+If you want the latest DOM text inside of update method you need to use, you can use the nextTick method.  The argument of the nextTick method is an anonymous function.  Move the console log into the anonymous function.
+``` javascript
+this.$nextTick(function(){
+  console.log(this.$el.innerText)
 })
 ```
-Then we instantiate the subclass, connecting the $mount method
-``` javascript
-	 new extend().$mount('#mount3')
-```   
+the nextTick will postpone the execution of the console log until the DOM has been updated.  This is not the same as the forceUpdate method as it only postpones the execution of its callback function it doesn't force Vue to rerender DOM.

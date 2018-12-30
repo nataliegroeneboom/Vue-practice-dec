@@ -5,42 +5,24 @@
 		<meta http-equiv='content-type' content='text/html;charset=utf-8'>
 		<meta name='viewport' content='width=device-width,initial-scale=1.0'>
 		<style>
-		body{font-size: 33px; color: white}
-		#mount1{background: crimson;padding: 5px; margin: 5px}
-		#mount2{background: teal;padding: 5px; margin: 5px}
-		#mount3{background: violet;padding: 5px; margin: 5px}
+		body{font-size: 33px; color: black}
 		</style>
 		<script type='text/javascript' src='vue.js'></script>
 	<body>
 
-
-
-		<!-- <div id="app"> -->
+<div id="app">
 <!-- <comp ></comp> -->
-<!-- <p>{{msg}}</p> </div> -->
+		<p>the value of the msg2 is <b style='color:red'>{{msg2}}</b></p>
+		<hr/>
+		<button v-on:click='update'>Update msg2</button>
+</div>
 
 <!-- <template id='temp'>
 <div id="temp_root">
 </div>
 </template> -->
 
-<div id='mount1'><p>Mount Point 1</p></div>
-<div id='mount2'><p>Mount Point 2</p></div>
-<div id='mount3'><p>Mount Point 3</p></div>
-
-
-
 	<script type='text/javascript'>
-
-	const extend = Vue.extend({
-		template:"<div style='color:red'><p>{{msg}}</p></div>",
-		data: function(){
-			return {
-				msg: 'message from subclass'
-			}
-		}
-	})
-	 new extend().$mount('#mount3')
 
 // Vue.component('comp', {
 // 	template:'#temp',
@@ -54,12 +36,31 @@
 // 	},
 // })
 
-// var vm = new Vue({
-// //  el: "#app",
-//   data: { msg:'msg defined in vue data'},
-//
-// })
-// vm.$mount('#app')
+var vm = new Vue({
+  el: "#app",
+  data: {
+		// msg:'msg defined in vue data',
+					msg2:0},
+	methods: {
+		update: function(){
+			this.msg2++
+			this.$nextTick(function(){
+				console.log(this.$el.innerText)
+			})
+			//console.log(this.$el.innerText);  //asyc method DOM not updated
+		}
+	},
+	// beforeCreate: function(){console.log('Hook:beforeCreate');},
+	// created: function(){console.log('Hook:created');},
+	// beforeMount: function(){console.log('Hook:beforeMount');},
+	// mounted: function(){console.log('Hook:mounted');},
+	// beforeUpdate: function(){console.log('Hook:beforeUpdate');},
+	// updated: function(){console.log('Hook:updated');},
+	// beforeDestroy: function(){console.log('Hook:beforeDestroy');},
+	// destroyed: function(){console.log('Hook:destroyed');},
+
+
+})
 
 	</script>
 	</body>
