@@ -12,9 +12,8 @@
 
 		<div id="app">
 <!-- <comp ></comp> -->
-	<p>the value of the MSG: {{msg}}</p>
-	<hr>
-	<button v-on:click='trigger'>TRIGGER</button>
+	<button v-on:click='trigger_a'>Trigger Event A</button>
+	<button v-on:click='trigger_b'>Trigger Event B</button>
 	   </div>
 <!-- <template id='temp'>
 <div id="temp_root">
@@ -35,28 +34,28 @@
 // 	},
 // })
 
-	var vm = new Vue({
-	  el: "#app",
-	 	data: {
-			msg: 1,
-	 },
-	 methods: {
-		 trigger: function(){
-			 this.msg++
-			 this.$emit(
-				 'event',
-				 this.msg
-			 )
-		 }
-	 }
-	})
-	vm.$on(
-		'event',
-		function(arg){
-			console.log(arg);
-		}
-	)
+var vm = new Vue({
+  el: "#app",
+  data: {},
+ methods: {
+   trigger_a: function(){
+     this.$emit('event_a')
+   },
+   trigger_b:function(){
+     this.$emit('event_b')
+   },
+   sayhi:function(){console.log('Hi!');},
+	  saybuy:function(){console.log('Buy!');},
+ }
+})
+	vm.$on('event_a',vm.sayhi)
+	vm.$on('event_a',vm.saybuy)
 
+	vm.$on('event_b',vm.sayhi)
+	vm.$on('event_b',vm.saybuy)
+
+vm.$off('event_b', vm.saybuy)
+//	vm.$off() // will unbind everything
 
 	</script>
 	</body>

@@ -42,3 +42,40 @@ if vm.$on is replaced with vm.$once, we will only see the console log of the fir
 
 ### $off
 this method removes listeners.
+
+### Example
+``` html
+<div id="app">
+<button v-on:click='trigger_a'>Trigger Event A</button>
+<button v-on:click='trigger_b'>Trigger Event B</button>
+ </div>
+ ```
+ if no arguments are called then all listeners are unbound.
+ ``` javascript
+ var vm = new Vue({
+   el: "#app",
+   data: {},
+  methods: {
+    trigger_a: function(){
+      this.$emit('event_a')
+    },
+    trigger_b:function(){
+      this.$emit('event_b')
+    },
+    sayhi:function(){console.log('Hi!');},
+ 	  saybuy:function(){console.log('Buy!');},
+  }
+ })
+ 	vm.$on('event_a',vm.sayhi)
+ 	vm.$on('event_a',vm.saybuy)
+
+ 	vm.$on('event_b',vm.sayhi)
+ 	vm.$on('event_b',vm.saybuy)
+
+ vm.$off('event_b', vm.saybuy)
+ 	vm.$off() // will unbind everything
+  ```
+  If you want to unbind event_b and the callback saybuy:
+  ``` javascript
+  vm.$off('event_b', vm.saybuy)
+  ```
