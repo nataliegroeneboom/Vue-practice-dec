@@ -12,7 +12,9 @@
 
 		<div id="app">
 <!-- <comp ></comp> -->
-	<p>{{msg}}</p>
+	<p>the value of the MSG: {{msg}}</p>
+	<hr>
+	<button v-on:click='trigger'>TRIGGER</button>
 	   </div>
 <!-- <template id='temp'>
 <div id="temp_root">
@@ -36,23 +38,25 @@
 	var vm = new Vue({
 	  el: "#app",
 	 	data: {
-			msg: 'msg defined by Vue data',
+			msg: 1,
 	 },
+	 methods: {
+		 trigger: function(){
+			 this.msg++
+			 this.$emit(
+				 'event',
+				 this.msg
+			 )
+		 }
+	 }
 	})
-	vm.$set(
-		vm.$options,
-		'my_option',
-		'value of my option'
+	vm.$on(
+		'event',
+		function(arg){
+			console.log(arg);
+		}
 	)
-	vm.$delete(
-		vm.$options,
-		'my_option'
-	)
-	vm.$set(
-		vm.$data,
-		'msg',
-		'a new message defined by Vue data'
-	)
+
 
 	</script>
 	</body>

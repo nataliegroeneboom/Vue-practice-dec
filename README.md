@@ -1,51 +1,44 @@
-# Vue-practice-dec - Section 8.5: Instance Methods - $set and $delete
+# Vue-practice-dec - Section 8.6: Instance Methods - $on and $once
 
-### $set
+Both $on and $once are used to monitor events. $on will keep monitoring the named event, while $once will only monitor it once.
 
-$set can help us create new items.  The $set method requires three arguments, the object name, the new property name (key) and the new value.
+v-on takes two arguments, the event name and a callback function.  The callback argument will automatically be set the the value of the emit method.
 
+### Example: $on, $once
+an example of $on, the 'event' is listened to every time and the value of the message is logged to the console.  
 
+``` html
+<div id="app">
+<p>the value of the MSG: {{msg}}</p>
+<hr>
+<button v-on:click='trigger'>TRIGGER</button>
+</div>
 
-### $delete
-$delete can help us delete items.  The method requires two arguments, the object name, and the property name to be deleted.
+<script type='text/javascript'>
 
-You can't use it on the vue instance or the root data object.
-
-### Example
-``` javascript
 var vm = new Vue({
   el: "#app",
   data: {
-    msg: 'msg defined by Vue data',
+    msg: 1,
  },
+ methods: {
+   trigger: function(){
+     this.msg++
+     this.$emit(
+       'event',
+       this.msg
+     )
+   }
+ }
 })
-vm.$set(
-  vm.$options,
-  'my_option',
-  'value of my option'
-)
-vm.$delete(
-  vm.$options,
-  'my_option'
+vm.$on(
+  'event',
+  function(arg){
+    console.log(arg);
+  }
 )
 ```
-The set method should never be used to create or delete data in root object.  You can't do this:
-``` javascript
-vm.$set(
-  vm.$data,
-  'new_msg',
-  'never do this....'
-)
-vm.$delete(
-  vm.$data,
-  'msg'
-)
-```
-However you can add a new value to an existing property.
-``` javascript
-vm.$set(
-  vm.$data,
-  'msg',
-  'a new message defined by Vue data'
-)
-```
+if vm.$on is replaced with vm.$once, we will only see the console log of the first 'event'.  
+
+### $off
+this method removes listeners.
