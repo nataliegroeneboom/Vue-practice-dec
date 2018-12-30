@@ -12,6 +12,7 @@
 
 		<div id="app">
 <!-- <comp ></comp> -->
+	<p>{{msg}}</p>
 	   </div>
 <!-- <template id='temp'>
 <div id="temp_root">
@@ -35,19 +36,24 @@
 	var vm = new Vue({
 	  el: "#app",
 	 	data: {
-			msg: 'apple',
+			msg: 'msg defined by Vue data',
 	 },
-
 	})
-vm.$watch(
-	'msg',
-	function(newValue, oldValue){
-		console.log(newValue, oldValue);
-	},
-	{
-		
-	}
-)
+	vm.$set(
+		vm.$options,
+		'my_option',
+		'value of my option'
+	)
+	vm.$delete(
+		vm.$options,
+		'my_option'
+	)
+	vm.$set(
+		vm.$data,
+		'msg',
+		'a new message defined by Vue data'
+	)
+
 	</script>
 	</body>
 </html>

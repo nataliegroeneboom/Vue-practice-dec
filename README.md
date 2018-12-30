@@ -1,27 +1,51 @@
-# Vue-practice-dec - Section 8.4: Instance Methods - $watch
+# Vue-practice-dec - Section 8.4: Instance Methods - $set and $delete
 
-### $watch
+### $set
 
+$set can help us create new items.  The $set method requires three arguments, the object name, the new property name (key) and the new value.
+
+
+
+### $delete
+$delete can help us delete items.  The method requires two arguments, the object name, and the property name to be deleted.
+
+You can't use it on the vue instance or the root data object.
+
+### Example
 ``` javascript
 var vm = new Vue({
   el: "#app",
   data: {
-    msg: 'apple',
+    msg: 'msg defined by Vue data',
  },
-
 })
-vm.$watch(
-'msg',
-function(newValue, oldValue){
-  console.log(newValue, oldValue);
-}
+vm.$set(
+  vm.$options,
+  'my_option',
+  'value of my option'
+)
+vm.$delete(
+  vm.$options,
+  'my_option'
 )
 ```
-watch method requires at least 2 arguments.  The first argument is to tell the watch method what to listen to.  The second argument is an anonymous function serving as a callback taking two arguments the new value and old value.
-
-In the console I change the value triggering the $watch method
-
-``` console
-vm.msg = 'orange'
+The set method should never be used to create or delete data in root object.  You can't do this:
+``` javascript
+vm.$set(
+  vm.$data,
+  'new_msg',
+  'never do this....'
+)
+vm.$delete(
+  vm.$data,
+  'msg'
+)
 ```
-The optional third argument is an object where we can set two properties, immediate and deep.  Immediate is set to false by default, if set to true the watch method will be triggered immediately when we refresh the page.
+However you can add a new value to an existing property.
+``` javascript
+vm.$set(
+  vm.$data,
+  'msg',
+  'a new message defined by Vue data'
+)
+```
