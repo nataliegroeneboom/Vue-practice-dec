@@ -1,73 +1,74 @@
-# Vue-practice-dec - Section 10: Render Function
+# Vue-practice-dec - Section 10.1: Render example to send information in/out of component
 
-You can use render function to compile a template. The value of render is an anonymous function serving as a callback taking the argument of createElement.  Inside the function we return the createElement function.
+### Starting point
+``` html
+<div id="app">
+<comp ref='comp' v-model='msg'>
+</comp><hr>
+<b>{{msg}}</b>
+</div>
 
-### Example
-``` javascript
+<template id='temp'>
+<div id="temp_root">
+	<input v-bind:value='my_prop' v-on:input='send($event.target.value)'/>
+</div>
+</template>
+
+	<script type='text/javascript'>
+
 Vue.component('comp', {
-	// template:'#temp',
-	render: function(createElement){
-			return createElement(
-				'p',
-				'contents we want to put in the P tag...'
-			)
-
+	template:'#temp',
+	props: ['my_prop'],
+	model: {
+		event:'my_event',
+		prop:'my_prop'
+	},
+	methods:{
+		send:function(v){
+			this.$emit('my_event',v)
+		}
 	}
 })
-```
 
-### Create Two HTML tags
-``` javascript
-Vue.component('comp', {
-	// template:'#temp',
-	render: function(createElement){
-		 const p = createElement(
-				'p',
-				'contents we want to put in the P tag...'
-			)
-		return createElement(
-				'div',
-				[p]
-			)
-
-	}
+var vm = new Vue({
+  el: "#app",
+  data: { msg: 'msg defined in Vue data'	},
 })
-```
-### Setting Attributes
+const comp = vm.$refs.comp
+	</script>
+	```
+### Create an input with render
 ``` javascript
-Vue.component('comp', {
-	// template:'#temp',
-	render: function(createElement){
-		 const p = createElement(
-				'p',
-				{
-					attrs:{
-						title:'the first P tag',
-					}
-				},
-				'contents we want to put in the P tag...'
-			)
-			const p2 = createElement(
- 				'p',
-				{
-					attrs:{
-						title:'the second P tag',
-					}
-				},
- 				'the second sentence...'
- 			)
-		return createElement(
-				'div',
-				{
-					style:{
-						fontFamily:'helvetica',
-						background:'crimson',
-						color:'white'
-					}
-				},
-				[p, p2]
-			)
+render:function(createElement){
+	return createElement(
+		'input',
+			{	attrs:{
+					title:'title set in render for input tag',
 
-	}
-})
+				}
+			}
+	)
+},
 ```
+### Sending data from msg data
+``` javascript
+{	attrs:{
+				title:'title set in render for input tag',
+			},
+domProps:{
+				value:this.my_prop
+			},
+
+}
+```
+### Sending data to msg data
+``` javascript
+on: {
+		input:function(event){
+			self.send(event.target.value)
+		}
+},
+// define this (self) just inside the render function
+var self = this
+```
+You can't use 'this' in event driven functions as the events are handled by the window object

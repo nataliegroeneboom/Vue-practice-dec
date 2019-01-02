@@ -13,12 +13,14 @@
 	<body>
 
 <div id="app">
-<comp ></comp>
+<comp ref='comp' v-model='msg'>
+</comp><hr>
+<b>{{msg}}</b>
 </div>
 
 <template id='temp'>
 <div id="temp_root">
-	<p>this is a comp</p>
+	<input v-bind:value='my_prop' v-on:input='send($event.target.value)'/>
 </div>
 </template>
 
@@ -26,38 +28,39 @@
 
 Vue.component('comp', {
 	// template:'#temp',
-	render: function(createElement){
-		 const p = createElement(
-				'p',
-				{
-					attrs:{
-						title:'the first P tag',
-					}
-				},
-				'contents we want to put in the P tag...'
-			)
-			const p2 = createElement(
- 				'p',
-				{
-					attrs:{
-						title:'the second P tag',
-					}
-				},
- 				'the second sentence...'
- 			)
-		return createElement(
-				'div',
-				{
-					style:{
-						fontFamily:'helvetica',
-						background:'crimson',
-						color:'white'
-					}
-				},
-				[p, p2]
-			)
 
+	render:function(createElement){
+			var self = this
+		return createElement(
+			'input',
+				{	attrs:{
+								title:'title set in render for input tag',
+				//		value:this.my_prop
+							},
+				domProps:{
+								value:this.my_prop
+							},
+				on: {
+						input:function(event){
+							self.send(event.target.value)
+						}
+				},
+				}
+		)
+	},
+	props: ['my_prop'],
+	model: {
+		event:'my_event',
+		prop:'my_prop'
+	},
+	methods:{
+		send:function(v){
+			this.$emit('my_event',v)
+		}
 	}
+	// render: function(createElement){
+	//
+	// }
 })
 
 var vm = new Vue({
@@ -65,7 +68,7 @@ var vm = new Vue({
   data: { msg: 'msg defined in Vue data'	},
 	// methods: {},
 })
-
+const comp = vm.$refs.comp
 	</script>
 
 	</body>
