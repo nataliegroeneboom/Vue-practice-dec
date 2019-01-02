@@ -4,18 +4,16 @@
 		<title>Vue Project</title>
 		<meta http-equiv='content-type' content='text/html;charset=utf-8'>
 		<meta name='viewport' content='width=device-width,initial-scale=1.0'>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 		<style>
 		body{font-size: 33px; color: black}
-		.fade-enter{opacity:0;font-size: 0px}
-		.fade-enter-active{transition:opacity 3s, font-size 3s}
-		.fade-leave-active{transition:opacity 3s, font-size 3s}
-		.fade-leave-to{opacity:0; font-size: 0px; font-size: 0px}
+
 		</style>
 		<script type='text/javascript' src='vue.js'></script>
 	<body>
 
 <div id="app">
-	<transition name='fade'>
+	<transition enter-active-class='animated rubberBand' leave-active-class='animated fadeOutRight'>
 <p v-if='show'>I am the p tag</p>
 	</transition>
 	<button @click='show=!show'>Show/Hide</button>
@@ -42,6 +40,7 @@ var vm = new Vue({
   data: {
 		show: true
 	},
+	methods: {},
 })
 
 	</script>
