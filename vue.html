@@ -7,42 +7,63 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 		<style>
 		body{font-size: 33px; color: black}
-
+		.fade-enter-active, .fade-leave-active{transition: font-size 2s}
+		.fade-enter, .fade-leave-to{font-size: 0}
 		</style>
 		<script type='text/javascript' src='vue.js'></script>
+		<script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.min.js"></script>
 	<body>
 
 <div id="app">
-	<transition enter-active-class='animated rubberBand' leave-active-class='animated fadeOutRight'>
+	<fade>
 <p v-if='show'>I am the p tag</p>
-	</transition>
-	<button @click='show=!show'>Show/Hide</button>
 <!-- <comp ></comp> -->
+</fade>
+	<button @click='show=!show'>Show/Hide</button>
 </div>
 
-<!-- <template id='temp'>
-<div id="temp_root">
-</div>
-</template> -->
+<template id='temp'>
+<!-- <div id="temp_root">
+</div> -->
+<transition v-bind:css='false'
+v-on:before-enter="beforeEnter"
+v-on:enter="enter"
+v-on:leave="leave"
+>
+<slot></slot>
+</transition>
+</template>
 
 	<script type='text/javascript'>
 
-// Vue.component('comp', {
-// 	template:'#temp',
-// 	props: ['prop1', 'prop2', 'prop3'],
-// 	data: function(){
-// 		return{	}
-// 	},
-// })
+Vue.component('fade', {
+	template:'#temp',
+	methods: {
+		beforeEnter: function(el){
+			el.style.opacity=0
+			el.style.fontSize=0
+		},
+		enter: function(el, done){
+			Velocity(el,{opacity:1, fontSize: '2em'},{duration:1000})
+			Velocity(el,{fontSize: '1em'},{duration:1000})
+			Velocity(el,{fontSize: '1em'},{complete:done})
+		},
+		leave: function(el, done){
+			Velocity(el,{fontSize: '2em'},{duration:1000})
+			Velocity(el,{opacity:0,fontSize: '0em'},{duration:1000})
+			Velocity(el,{opacity:0,fontSize: '0em'},{complete:done})
+		}
+	}
+
+})
 
 var vm = new Vue({
   el: "#app",
-  data: {
-		show: true
-	},
+  data: { show: true,	},
 	methods: {},
 })
 
 	</script>
+
 	</body>
 </html>
