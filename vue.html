@@ -14,7 +14,7 @@
 
 <div id="app">
 <!-- <comp></comp> -->
-<p v-test:argument.modifier='msg'>
+<p v-test>
 {{msg}}
 </p><hr />
 <button @click='update'>Update</button>
@@ -33,15 +33,8 @@
 // 	methods:{}
 //
 // })
-Vue.directive('test',{
-update:function(el, binding){
-console.log('name: '+binding.name);
-console.log('value: '+binding.value);
-console.log('oldValue: '+binding.oldValue);
-console.log('expression: '+binding.expression);
-console.log('arg: '+binding.arg);
-console.log('modifiers: '+binding.modifiers);
-}
+Vue.directive('test',function(el, binding){
+	console.log('bind and update')
 })
 var vm = new Vue({
   el: "#app",
