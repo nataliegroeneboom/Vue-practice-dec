@@ -13,62 +13,46 @@
 	<body>
 
 <div id="app">
-<comp ref='comp' v-model='msg'>
-</comp><hr>
-<b>{{msg}}</b>
+<!-- <comp></comp> -->
+<p v-test:argument.modifier='msg'>
+{{msg}}
+</p><hr />
+<button @click='update'>Update</button>
 </div>
 
-<template id='temp'>
+<!-- <template id='temp'>
 <div id="temp_root">
-	<input v-bind:value='my_prop' v-on:input='send($event.target.value)'/>
 </div>
-</template>
+</template> -->
 
 	<script type='text/javascript'>
 
-Vue.component('comp', {
-	// template:'#temp',
-
-	render:function(createElement){
-			var self = this
-		return createElement(
-			'input',
-				{	attrs:{
-								title:'title set in render for input tag',
-				//		value:this.my_prop
-							},
-				domProps:{
-								value:this.my_prop
-							},
-				on: {
-						input:function(event){
-							self.send(event.target.value)
-						}
-				},
-				}
-		)
-	},
-	props: ['my_prop'],
-	model: {
-		event:'my_event',
-		prop:'my_prop'
-	},
-	methods:{
-		send:function(v){
-			this.$emit('my_event',v)
-		}
-	}
-	// render: function(createElement){
-	//
-	// }
+// Vue.component('comp', {
+// 	template:'#temp',
+// 	props: ['my_prop'],
+// 	methods:{}
+//
+// })
+Vue.directive('test',{
+update:function(el, binding){
+console.log('name: '+binding.name);
+console.log('value: '+binding.value);
+console.log('oldValue: '+binding.oldValue);
+console.log('expression: '+binding.expression);
+console.log('arg: '+binding.arg);
+console.log('modifiers: '+binding.modifiers);
+}
 })
-
 var vm = new Vue({
   el: "#app",
   data: { msg: 'msg defined in Vue data'	},
-	// methods: {},
+	methods: {
+		update:function(){
+			this.msg='updated value'
+		}
+	},
 })
-const comp = vm.$refs.comp
+
 	</script>
 
 	</body>
