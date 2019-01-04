@@ -12,7 +12,15 @@
 		<script type='text/javascript' src='vue.js'></script>
 	<body>
 
-<div id="app">
+<div id="app1">
+<!-- <comp></comp> -->
+<ul>
+	<li v-for='element in $data'>
+		{{element}}
+	</li>
+</ul>
+</div>
+<div id="app2">
 <!-- <comp></comp> -->
 <ul>
 	<li v-for='element in $data'>
@@ -34,29 +42,28 @@
 // 	methods:{}
 //
 // })
-
-var my_mixin = {
-	template:'<b>template defined in MIXIN</b>',
-	data:{
-		mixin_msg: 'msg defined in MIXIN'
-	},
-	methods: {
-		saybye:function(){
-		console.log('saybye method from MIXIN method');
+Vue.mixin({
+	data:function(){
+		return{
+			mixin_msg:'MSG defined in GLOBAL MIXIN'
 		}
+	},
+	created:function(){
+		console.log(this.msg1);
 	}
-}
+})
 
-var vm = new Vue({
-  el: "#app",
-	mixins: [my_mixin],
-  data: { msg1: 'msg1 defined in Vue data',
-					msg2: 'msg2 defined in Vue data',},
-	methods: {
-		sayhi:function(){
-		console.log('sayhi method from Vue method');
-		}
-	},
+var vm1 = new Vue({
+  el: "#app1",
+  data: { msg1: 'msg1 defined in Vue 1 data',
+					msg2: 'msg2 defined in Vue 1 data',},
+	methods: {}
+})
+var vm2 = new Vue({
+  el: "#app2",
+  data: { msg1: 'msg1 defined in Vue 2 data',
+					msg2: 'msg2 defined in Vue 2 data',},
+	methods: {}
 })
 
 	</script>
