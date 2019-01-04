@@ -14,10 +14,11 @@
 
 <div id="app">
 <!-- <comp></comp> -->
-<p v-test>
-{{msg}}
-</p><hr />
-<button @click='update'>Update</button>
+<ul>
+	<li v-for='element in $data'>
+		{{element}}
+	</li>
+</ul>
 </div>
 
 <!-- <template id='temp'>
@@ -33,15 +34,27 @@
 // 	methods:{}
 //
 // })
-Vue.directive('test',function(el, binding){
-	console.log('bind and update')
-})
+
+var my_mixin = {
+	template:'<b>template defined in MIXIN</b>',
+	data:{
+		mixin_msg: 'msg defined in MIXIN'
+	},
+	methods: {
+		saybye:function(){
+		console.log('saybye method from MIXIN method');
+		}
+	}
+}
+
 var vm = new Vue({
   el: "#app",
-  data: { msg: 'msg defined in Vue data'	},
+	mixins: [my_mixin],
+  data: { msg1: 'msg1 defined in Vue data',
+					msg2: 'msg2 defined in Vue data',},
 	methods: {
-		update:function(){
-			this.msg='updated value'
+		sayhi:function(){
+		console.log('sayhi method from Vue method');
 		}
 	},
 })
