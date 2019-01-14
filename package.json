@@ -1,0 +1,22 @@
+{
+  "name": "vue-practice-dec",
+  "version": "1.0.0",
+  "description": "Add Created hook, instantiating the xml http object.",
+  "main": "vue.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nataliegroeneboom/Vue-practice-dec.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nataliegroeneboom/Vue-practice-dec/issues"
+  },
+  "homepage": "https://github.com/nataliegroeneboom/Vue-practice-dec#readme",
+  "dependencies": {
+    "vue-resource": "^1.5.1"
+  }
+}

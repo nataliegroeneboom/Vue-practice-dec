@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Vue Project</title>
+		<meta http-equiv='content-type' content='text/html;charset=utf-8'>
+		<meta name='viewport' content='width=device-width,initial-scale=1.0'>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+		<style>
+		body{font-size: 33px; color: black}
+		#temp-root{background: crimson; color: white}
+		</style>
+		<script type='text/javascript' src='vue.js'></script>
+	<body>
+
+<div id="app">
+<!-- <comp></comp> -->
+<ul id='list' v-if='car_info_set.length'>
+	<li v-for='element in car_info_set'>
+		Brand is <b> {{element.brand}}</b>, model is <b>{{element.model}}</b>,
+		engine is <b> {{element.engine}}</b> and gearbox is <b>{{element.gearbox}}</b>,
+	</li>
+</ul>
+ <p id="err_msg" v-else>
+	 {{err_msg}}
+ </p>
+</div>
+
+
+<!-- <template id='temp'>
+<div id="temp_root">
+</div>
+</template> -->
+
+	<script type='text/javascript'>
+
+// Vue.component('comp', {
+// 	template:'#temp',
+// 	props: ['my_prop'],
+// 	methods:{}
+//
+// })
+
+
+var vm = new Vue({
+
+  el: "#app",
+  data: { car_info_set:[
+	],
+	err_msg:'Sorry, no records',
+	ajax: null,
+	url: './connect.php'
+				},
+	created: function(){
+		this.ajax = new XMLHttpRequest()
+		this.request()
+	},
+	 methods: {
+		 request: function(){
+		//	 console.log('request')
+			 this.ajax.onreadystatechange = this.response
+
+			 this.ajax.open('POST', this.url, true)
+			 this.ajax.setRequestHeader('Content-type','application/x-www-form-urlencoded')
+			 this.ajax.setRequestHeader('Access-Control-Allow-Methods','POST')
+			 this.ajax.send('range=all')
+			 console.log('request')
+		 },
+		 response:function(){
+			 if(this.ajax.readyState == 4){
+				 if(this.ajax.status == 200){
+					 console.log('yes');
+					 console.log(JSON.parse(this.ajax.responseText))
+				 }
+			 }
+		 }
+	 }
+
+})
+
+
+	</script>
+
+	</body>
+</html>
