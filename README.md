@@ -1,6 +1,7 @@
 # Vue-practice-dec - Section 3.2: v-model
 
 ## A simple example
+v-model is a two way binding directive.  Very useful in input values. In the below example the input is bound to the message variable and whatever is input is reflected within <p>{{message}}</p>
 ``` html
 <div id='app'>
 <input type="text" v-model='message'>
